@@ -50,11 +50,42 @@ Admin: botga `/admin` yuboring — `ADMIN_IDS` boʻsh boʻlsa, bot sizning Teleg
 Uni `.env` dagi `ADMIN_IDS` ga yozib, botni qayta ishga tushiring.
 Inline rejim uchun BotFather'da `/setinline` yoqilishi shart.
 
-Docker:
+## Serverga joylash (imlochi.sifatedu.uz)
+
+Bot webhook rejimida, sayt esa Caddy orqali HTTPS bilan ishlaydi (sertifikat avtomatik olinadi).
+
+1. VPS oling (Ubuntu, 1 vCPU / 1 GB RAM yetarli) va unga Docker oʻrnating.
+2. DNS: `sifatedu.uz` boshqaruv panelida **A yozuv** qoʻshing — `imlochi` → server IP manzili.
+3. Serverda:
+
+```bash
+git clone https://github.com/fotimaruziyeva77/imlochiuz.git && cd imlochiuz
+```
+
+```bash
+cp .env.example .env
+```
+
+4. `.env` ni toʻldiring:
+
+```
+BOT_TOKEN=...
+ADMIN_IDS=...
+DOMAIN=imlochi.sifatedu.uz
+WEBHOOK_URL=https://imlochi.sifatedu.uz
+SITE_URL=https://imlochi.sifatedu.uz
+WEBHOOK_SECRET=<uzun tasodifiy satr>
+STATS_SALT=<uzun tasodifiy satr>
+```
+
+5. Ishga tushiring:
 
 ```bash
 docker compose up -d --build
 ```
+
+Bot va sayt bitta konteynerda: `https://imlochi.sifatedu.uz` — sayt, `/webhook` — Telegram, `/health` — tekshiruv.
+Bir token bilan bir vaqtda faqat bitta bot nusxasi ishlashi mumkin — serverdagisi ishga tushgach, kompyuterdagini toʻxtating.
 
 ## Testlar
 

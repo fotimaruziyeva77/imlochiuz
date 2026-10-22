@@ -1,0 +1,6 @@
+# Caddy HTTPS sertifikatini (Let's Encrypt) avtomatik oladi va yangilaydi.
+# DOMAIN .env da beriladi, masalan: DOMAIN=imlochi.sifatedu.uz
+{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy bot:8080
+}

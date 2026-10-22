@@ -7,6 +7,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY *.py ./
+COPY web ./web
 
 RUN useradd --create-home bot && mkdir /data && chown bot /data
 USER bot

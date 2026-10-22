@@ -1,14 +1,35 @@
+# Serverda ishga tushirish: docker compose up -d --build
+# .env da kamida: BOT_TOKEN, DOMAIN, WEBHOOK_URL, SITE_URL, WEBHOOK_SECRET, ADMIN_IDS
 services:
   bot:
     build: .
     env_file: .env
     environment:
       DB_PATH: /data/alifbo.db
+      HOST: 0.0.0.0
+      PORT: "8080"
     volumes:
       - botdata:/data
+    expose:
+      - "8080"
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2.8-alpine
+    env_file: .env
     ports:
-      - "127.0.0.1:8080:8080"   # webhook: oldiga HTTPS reverse proxy (nginx/caddy) qo'yiladi
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - bot
     restart: unless-stopped
 
 volumes:
   botdata:
+  caddy_data:
+  caddy_config:
