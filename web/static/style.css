@@ -1,0 +1,167 @@
+:root {
+  --bg: #f6f7fd;
+  --bg-alt: #eef0fb;
+  --surface: #ffffff;
+  --ink: #0d1440;
+  --muted: #5b6390;
+  --line: #e1e4f5;
+  --brand: #3b5bfd;
+  --brand-2: #6d4cf5;
+  --accent: #22c98a;
+  --chip: #eef1ff;
+  --shadow: 0 10px 30px rgba(31, 46, 140, 0.10);
+  --radius: 20px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1030;
+    --bg-alt: #0f1640;
+    --surface: #141c4d;
+    --ink: #eef1ff;
+    --muted: #a7aed6;
+    --line: #26306a;
+    --chip: #1c2560;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1030; --bg-alt: #0f1640; --surface: #141c4d; --ink: #eef1ff;
+  --muted: #a7aed6; --line: #26306a; --chip: #1c2560; --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Nunito'da o'kina/apostrof keng chiqadi — faqat shu belgilar uchun tizim shrifti. */
+@font-face {
+  font-family: "Apostrof";
+  src: local("Segoe UI"), local("Arial"), local("Helvetica Neue"), local("Roboto");
+  unicode-range: U+2018, U+2019, U+02BB, U+02BC;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 500 17px/1.6 "Apostrof", "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--brand); text-decoration: none; }
+code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .9em; background: var(--chip); padding: .1em .4em; border-radius: 6px; }
+
+.wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+
+/* --- Tugmalar --- */
+.btn {
+  display: inline-flex; align-items: center; gap: .5em;
+  padding: .8em 1.4em; border-radius: 999px; border: 0;
+  font: inherit; font-weight: 800; cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn svg { width: 1.2em; height: 1.2em; fill: currentColor; }
+.btn:hover { transform: translateY(-1px); }
+.btn:focus-visible, .mode:focus-visible, textarea:focus-visible { outline: 3px solid color-mix(in srgb, var(--brand) 45%, transparent); outline-offset: 2px; }
+.btn-primary { color: #fff; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 8px 20px rgba(59, 91, 253, .35); }
+.btn-ghost { color: var(--brand); background: transparent; border: 2px solid color-mix(in srgb, var(--brand) 35%, transparent); }
+.btn-soft { color: var(--brand); background: var(--chip); }
+.btn-sm { padding: .5em 1em; font-size: .9rem; }
+
+/* --- Yuqori panel --- */
+.topbar { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.topbar-inner { display: flex; align-items: center; gap: 24px; height: 68px; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 900; font-size: 1.3rem; }
+.brand img { border-radius: 12px; }
+.nav { display: flex; gap: 22px; margin-left: auto; }
+.nav a { color: var(--muted); font-weight: 700; }
+.nav a:hover { color: var(--ink); }
+
+/* --- Hero --- */
+.hero { padding: 64px 0 40px; background: radial-gradient(1000px 500px at 85% 10%, color-mix(in srgb, var(--brand) 14%, transparent), transparent 70%); }
+.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
+.eyebrow { display: inline-block; margin: 0 0 12px; padding: .25em .9em; border-radius: 999px; background: var(--chip); color: var(--brand); font-weight: 800; font-size: .85rem; letter-spacing: .02em; }
+h1 { margin: 0 0 16px; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.08; font-weight: 900; letter-spacing: -.02em; }
+.grad { background: linear-gradient(135deg, var(--brand), var(--brand-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.lead { margin: 0 0 22px; color: var(--muted); font-size: 1.15rem; max-width: 34em; }
+.letters-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+.letters-strip span { padding: .35em .9em; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); font-weight: 900; font-size: 1.15rem; }
+.letters-strip b { color: var(--accent); margin: 0 .3em; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.users-count { margin: 18px 0 0; color: var(--muted); }
+.users-count b { color: var(--ink); }
+.hero-art img { width: min(460px, 100%); margin-inline: auto; filter: drop-shadow(0 20px 40px rgba(59, 91, 253, .25)); border-radius: 32px; }
+
+/* --- Bo'limlar --- */
+.section { padding: 64px 0; }
+.section.alt { background: var(--bg-alt); }
+h2 { margin: 0 0 8px; font-size: clamp(1.7rem, 3.4vw, 2.3rem); font-weight: 900; letter-spacing: -.01em; }
+.sub { margin: 0 0 28px; color: var(--muted); }
+
+/* --- O'girgich --- */
+.converter { padding: 20px; }
+.modes { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.mode { padding: .45em 1em; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-weight: 800; cursor: pointer; }
+.mode:hover { border-color: var(--brand); }
+.mode.active { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color: #fff; border-color: transparent; }
+.panes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pane { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.pane-label { font-weight: 800; }
+.pane-label small { color: var(--muted); font-weight: 700; margin-left: .4em; }
+textarea, output {
+  width: 100%; min-height: 220px; padding: 14px 16px; border-radius: 14px;
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+  font: 600 1.05rem/1.6 "Apostrof", "Nunito", system-ui, sans-serif;
+}
+textarea { resize: vertical; }
+output { display: block; white-space: pre-wrap; overflow-wrap: anywhere; background: var(--chip); }
+.pane-foot { display: flex; justify-content: space-between; align-items: center; min-height: 36px; color: var(--muted); font-size: .9rem; }
+.status { color: var(--muted); }
+.status.err { color: #e5484d; }
+.legend { margin: 14px 0 0; color: var(--muted); font-size: .9rem; }
+
+/* --- Harflar --- */
+.letters { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.letter { padding: 22px; text-align: center; }
+.pair { display: flex; justify-content: center; align-items: baseline; gap: 10px; font-weight: 900; font-size: 1.6rem; }
+.pair .old { color: var(--muted); }
+.pair .arrow { color: var(--accent); }
+.pair .new { color: var(--brand); font-size: 2rem; }
+.letter p { margin: 8px 0 0; color: var(--muted); }
+.letter p b { color: var(--ink); }
+.notes { margin-top: 24px; display: grid; gap: 6px; color: var(--muted); }
+.notes p { margin: 0; }
+.notes b { color: var(--ink); }
+
+/* --- Imkoniyatlar --- */
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.feature { padding: 22px; }
+.feature .ico { font-size: 1.6rem; }
+.feature h3 { margin: 8px 0 4px; font-size: 1.15rem; font-weight: 900; }
+.feature p { margin: 0; color: var(--muted); }
+.feature.soon { border-style: dashed; box-shadow: none; }
+
+/* --- Ulashish --- */
+.share-inner { display: flex; align-items: center; gap: 24px; padding: 28px; flex-wrap: wrap; }
+.share-inner img { border-radius: 20px; }
+.share-inner .sub { margin: 0; }
+.share-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-left: auto; }
+
+.footer { padding: 28px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+.footer-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-art { order: -1; }
+  .hero-art img { width: 240px; }
+  .letters { grid-template-columns: repeat(2, 1fr); }
+  .features { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .nav { display: none; }
+  .topbar-inner { justify-content: space-between; }
+  .hero { padding-top: 32px; }
+  .panes, .features { grid-template-columns: 1fr; }
+  .share-actions { margin-left: 0; }
+  .section { padding: 44px 0; }
+}

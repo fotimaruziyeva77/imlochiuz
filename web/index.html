@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Imlochi — yangi o‘zbek alifbosi yordamchisi</title>
+  <meta name="description" content="Matnni kirill, eski lotin va yangi o‘zbek alifbosi (Ö, Ğ, Ş, Ç) o‘rtasida bir zumda o‘giring. Bepul Telegram bot va onlayn o‘girgich.">
+  <meta property="og:title" content="Imlochi — yangi o‘zbek alifbosi yordamchisi">
+  <meta property="og:description" content="O‘→Ö, G‘→Ğ, Sh→Ş, Ch→Ç. Matnni bir zumda yangi alifboga o‘giring.">
+  <meta property="og:image" content="/static/logo.webp">
+  <link rel="icon" href="/static/logo.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#top" aria-label="Imlochi">
+        <img src="/static/logo.webp" alt="" width="40" height="40">
+        <span>Imlochi</span>
+      </a>
+      <nav class="nav">
+        <a href="#ogirgich">O‘girgich</a>
+        <a href="#harflar">Harflar</a>
+        <a href="#imkoniyatlar">Imkoniyatlar</a>
+      </nav>
+      <a class="btn btn-primary btn-sm" href="https://t.me/{{BOT_USERNAME}}" target="_blank" rel="noopener">Telegramda ochish</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow">O‘RQ-1184 · 21.10.2026</p>
+          <h1>Yangi alifboga <span class="grad">bir zumda</span> o‘ting</h1>
+          <p class="lead">Imlochi matnni kirill, eski lotin va yangi o‘zbek alifbosi o‘rtasida o‘giradi —
+            Telegram'da, istalgan chatda va shu saytda. Bepul.</p>
+          <div class="letters-strip" aria-label="O‘zgargan harflar">
+            <span>O‘<b>→</b>Ö</span><span>G‘<b>→</b>Ğ</span><span>Sh<b>→</b>Ş</span><span>Ch<b>→</b>Ç</span>
+          </div>
+          <div class="cta">
+            <a class="btn btn-primary" href="https://t.me/{{BOT_USERNAME}}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19.4c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.2-8.3c.4-.4-.1-.6-.6-.2L6.1 13.1l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 2.7c.9-.3 1.7.2 1.4 1.6z"/></svg>
+              Botni ochish
+            </a>
+            <a class="btn btn-ghost" href="#ogirgich">Saytda sinab ko‘rish</a>
+          </div>
+          <p class="users-count" id="users-count" hidden><b></b> kishi Imlochi'dan foydalanmoqda</p>
+        </div>
+        <div class="hero-art">
+          <img src="/static/logo.webp" alt="Imlochi — yangi o‘zbek alifbosi yordamchisi" width="460" height="460">
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ogirgich">
+      <div class="wrap">
+        <h2>Onlayn o‘girgich</h2>
+        <p class="sub">Matnni yozing yoki joylang — natija darhol chiqadi. Matningiz saqlanmaydi.</p>
+
+        <div class="converter card">
+          <div class="modes" role="radiogroup" aria-label="O‘girish yo‘nalishi">
+            <button type="button" class="mode active" data-dir="auto" role="radio" aria-checked="true">Avto</button>
+            <button type="button" class="mode" data-dir="cyr_new" role="radio" aria-checked="false">ЎЗ→ÖZ</button>
+            <button type="button" class="mode" data-dir="old_new" role="radio" aria-checked="false">O‘Z→ÖZ</button>
+            <button type="button" class="mode" data-dir="new_old" role="radio" aria-checked="false">ÖZ→O‘Z</button>
+            <button type="button" class="mode" data-dir="cyr_old" role="radio" aria-checked="false">ЎЗ→O‘Z</button>
+            <button type="button" class="mode" data-dir="old_cyr" role="radio" aria-checked="false">O‘Z→ЎЗ</button>
+            <button type="button" class="mode" data-dir="new_cyr" role="radio" aria-checked="false">ÖZ→ЎЗ</button>
+          </div>
+          <div class="panes">
+            <label class="pane">
+              <span class="pane-label">Matn</span>
+              <textarea id="src" rows="7" maxlength="10000" placeholder="Masalan: Тошкент шаҳри — O'zbekiston poytaxti">Тошкент шаҳри — O'zbekiston poytaxti. Choyxonada qo'ng'iroq chalindi.</textarea>
+              <span class="pane-foot"><span><span id="src-count">0</span> / 10 000</span></span>
+            </label>
+            <div class="pane pane-out">
+              <span class="pane-label">Natija <small id="dir-label"></small></span>
+              <output id="out" aria-live="polite"></output>
+              <span class="pane-foot">
+                <span id="status" class="status"></span>
+                <button type="button" class="btn btn-sm btn-soft" id="copy">Nusxa olish</button>
+              </span>
+            </div>
+          </div>
+          <p class="legend">ЎЗ — kirill · O‘Z — eski lotin · ÖZ — yangi alifbo</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="harflar">
+      <div class="wrap">
+        <h2>Nima o‘zgardi?</h2>
+        <p class="sub">Qonun to‘rtta harf shaklini o‘zgartirdi. Alifboda 28 ta harf va 1 ta tutuq belgisi bor.</p>
+        <div class="letters">
+          <article class="letter card"><div class="pair"><span class="old">O‘ o‘</span><span class="arrow">→</span><span class="new">Ö ö</span></div><p>o‘zbek → <b>özbek</b></p></article>
+          <article class="letter card"><div class="pair"><span class="old">G‘ g‘</span><span class="arrow">→</span><span class="new">Ğ ğ</span></div><p>tog‘ → <b>toğ</b></p></article>
+          <article class="letter card"><div class="pair"><span class="old">Sh sh</span><span class="arrow">→</span><span class="new">Ş ş</span></div><p>shahar → <b>şahar</b></p></article>
+          <article class="letter card"><div class="pair"><span class="old">Ch ch</span><span class="arrow">→</span><span class="new">Ç ç</span></div><p>choy → <b>çoy</b></p></article>
+        </div>
+        <div class="notes">
+          <p><b>ng</b> alohida harf sifatida chiqarildi, lekin yozuvda n+g bo‘lib qoladi: <i>rang, bodring</i>.</p>
+          <p><b>Tutuq belgisi</b> saqlanadi: <i>ta’lim, ma’no</i>. Aniq ko‘rinishi yangi imlo qoidalarida belgilanadi.</p>
+          <p>Qonun rasman e’lon qilinganidan <b>6 oy</b> o‘tgach kuchga kiradi.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="imkoniyatlar">
+      <div class="wrap">
+        <h2>Imkoniyatlar</h2>
+        <div class="features">
+          <article class="feature card"><span class="ico">⚡</span><h3>Bir zumda</h3><p>Matn yuboring — yangi alifbodagi varianti bir soniyada qaytadi.</p></article>
+          <article class="feature card"><span class="ico">💬</span><h3>Istalgan chatda</h3><p><code>@{{BOT_USERNAME}} matn</code> deb yozing va kerakli variantni tanlang.</p></article>
+          <article class="feature card"><span class="ico">🔁</span><h3>6 yo‘nalish</h3><p>Kirill, eski lotin va yangi alifbo o‘rtasida istalgan tomonga.</p></article>
+          <article class="feature card"><span class="ico">🔗</span><h3>Havolalar butun</h3><p>URL, e-mail, @username, #hashtag va kod o‘zgartirilmaydi.</p></article>
+          <article class="feature card"><span class="ico">🔒</span><h3>Maxfiy</h3><p>Matningiz o‘girilgach hech qayerda saqlanmaydi.</p></article>
+          <article class="feature card soon"><span class="ico">🖼️</span><h3>Tez orada</h3><p>Rasm, hujjat va ovozli xabarni o‘girish, imlo tekshiruvi, mashqlar.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section share" id="ulashish">
+      <div class="wrap share-inner card">
+        <img src="/static/logo.webp" alt="" width="96" height="96">
+        <div>
+          <h2>Do‘stlaringizga ulashing</h2>
+          <p class="sub">Yangi alifboga o‘tish hammaga kerak — Imlochi bilan bu oson.</p>
+        </div>
+        <div class="share-actions">
+          <a class="btn btn-primary" href="{{SHARE_URL}}" target="_blank" rel="noopener">Telegramda ulashish</a>
+          <button type="button" class="btn btn-ghost" id="share-copy" data-link="https://t.me/{{BOT_USERNAME}}">Havolani nusxalash</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 Imlochi — yangi o‘zbek alifbosi yordamchisi</span>
+      <span>Asos: O‘RQ-1184-son Qonun, 21.10.2026. Imlo qoidalari tasdiqlangach yangilanadi.</span>
+    </div>
+  </footer>
+
+  <script src="/static/app.js" defer></script>
+</body>
+</html>
